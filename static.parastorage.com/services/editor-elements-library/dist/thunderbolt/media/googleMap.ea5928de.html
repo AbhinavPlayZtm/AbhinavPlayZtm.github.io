@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <head>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+        <style type="text/css">
+            * {
+                border: none;
+                margin: 0;
+                padding: 0;
+            }
+
+            html {
+                height: 100%;
+            }
+
+            body {
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+
+            #map_canvas {
+                height: 100%;
+                width: 100%;
+            }
+
+            .gm-style-iw p {
+                width: 101%;
+            }
+
+            #content {
+                overflow-x: hidden;
+            }
+        </style>
+        <script>
+            (function() {
+                var params = new URLSearchParams(window.location.search);
+                var decodedGoogleMapsScriptPath = decodeURIComponent(
+                    params.get('googleMapsScriptPath'),
+                );
+                var googleMapsScriptPath;
+                try { // if it is an URL, get only path part
+                    googleMapsScriptPath = new URL(decodedGoogleMapsScriptPath).pathname;
+                } catch (e) {
+                    googleMapsScriptPath = decodedGoogleMapsScriptPath;
+                }
+                var scriptUrl = `${googleMapsScriptPath}?origin=${decodeURIComponent(params.get('origin'))}`;
+
+                var script = document.createElement('script');
+                script.src = scriptUrl;
+                document.head.appendChild(script);
+            })();
+        </script>
+    </head>
+</head>
+
+<body>
+    <div id="map_canvas"></div>
+</body>
+
+</html>
